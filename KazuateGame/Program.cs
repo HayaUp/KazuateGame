@@ -24,7 +24,29 @@ namespace KazuateGame
 
                 if(input_value == "q")
                 {
+                    Console.WriteLine("ゲームを終了します。");
                     break;
+                }
+
+                var input_number = 0;
+
+                // 入力は数値が前提だけど英字等が入力される可能性もある
+                if(int.TryParse(input_value, out input_number))
+                {
+                    if(input_number == unknown_value)
+                    {
+                        Console.WriteLine("正解です！");
+                        Console.ReadLine();
+                        break;
+                    }
+                    else if(input_number > unknown_value)
+                    {
+                        Console.WriteLine($"{input_number}は大きいです。");
+                    }
+                    else if(input_number < unknown_value)
+                    {
+                        Console.WriteLine($"{input_number}は小さいです。");
+                    }
                 }
             }
         }
