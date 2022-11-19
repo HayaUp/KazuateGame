@@ -17,6 +17,16 @@ namespace KazuateGame
 
             Console.WriteLine("1～100の数値を入力し当ててください。");
             Console.WriteLine("q を入力するとゲームを終了します。");
+
+            while(true)
+            {
+                var input_value = Console.ReadLine();
+
+                if(input_value == "q")
+                {
+                    break;
+                }
+            }
         }
     }
 }
