@@ -11,6 +11,11 @@ namespace KazuateGame
         static void Main(string[] args)
         {
             Console.Title = "数当てゲーム";
+
+            var random = new Random(DateTime.Now.Second);
+
+            var unknown_value = random.Next(1, 101);
+            Console.WriteLine(unknown_value);
         }
     }
 }
