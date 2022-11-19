@@ -13,9 +13,10 @@ namespace KazuateGame
             Console.Title = "数当てゲーム";
 
             var random = new Random(DateTime.Now.Second);
-
             var unknown_value = random.Next(1, 101);
-            Console.WriteLine(unknown_value);
+
+            Console.WriteLine("1～100の数値を入力し当ててください。");
+            Console.WriteLine("q を入力するとゲームを終了します。");
         }
     }
 }
