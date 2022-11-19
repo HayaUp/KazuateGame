@@ -36,8 +36,18 @@ namespace KazuateGame
                     if(input_number == unknown_value)
                     {
                         Console.WriteLine("正解です！");
-                        Console.ReadLine();
-                        break;
+                        Console.WriteLine("もう1度プレイされるなら 1 を入力してください。");
+                        if(Console.ReadLine() == "1")
+                        {
+                            Console.Clear();
+                            Console.WriteLine("1～100の数値を入力し当ててください。");
+                            Console.WriteLine("q を入力するとゲームを終了します。");
+                            unknown_value = random.Next(1, 101);
+                        }
+                        else
+                        {
+                            break;
+                        }
                     }
                     else if(input_number > unknown_value)
                     {
