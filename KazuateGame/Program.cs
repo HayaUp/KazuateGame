@@ -31,9 +31,8 @@ namespace KazuateGame
                 // キー入力
                 var input_value = Console.ReadLine();
 
-                if(input_value == ExitKey)
+                if(ExitGame(input_value))
                 {
-                    Console.WriteLine("ゲームを終了します。");
                     break;
                 }
 
@@ -79,6 +78,16 @@ namespace KazuateGame
             Console.Clear();
             Console.WriteLine($"{RandomMinValue}～{DisplayMaxValue}の数値を入力し当ててください。");
             Console.WriteLine($"{ExitKey} を入力するとゲームを終了します。");
+        }
+
+        /// <summary>
+        /// 特定のキーを押したらゲームを終了する
+        /// </summary>
+        /// <param name="input_key"></param>
+        /// <returns></returns>
+        static bool ExitGame(string input_key)
+        {
+            return input_key == ExitKey;
         }
     }
 }
