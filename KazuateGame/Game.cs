@@ -14,7 +14,7 @@ namespace KazuateGame
         public readonly string ReplayKey;
 
         // 入力値と特定の範囲の値の判定結果
-        public enum JudgmentResult
+        public enum JudgmentResultStatus
         {
             Unknown,
             Equal,
@@ -72,35 +72,35 @@ namespace KazuateGame
         /// </summary>
         /// <param name="input_value">入力値</param>
         /// <returns>判定内容</returns>
-        public JudgmentResult Judge(string input_value)
+        public JudgmentResultStatus Judge(string input_value)
         {
             // 入力は数値が前提だけど英字等が入力される可能性もある
             if(int.TryParse(input_value, out int input_number))
             {
                 if(input_number == UnknownValue)
                 {
-                    return JudgmentResult.Equal;
+                    return JudgmentResultStatus.Equal;
                 }
                 else if(input_number < UnknownValue)
                 {
-                    return JudgmentResult.Small;
+                    return JudgmentResultStatus.Small;
                 }
                 else if(input_number > UnknownValue)
                 {
-                    return JudgmentResult.Big;
+                    return JudgmentResultStatus.Big;
                 }
             }
 
-            return JudgmentResult.Unknown;
+            return JudgmentResultStatus.Unknown;
         }
 
         /// <summary>
         /// 判定内容によって判定結果を表示する
         /// </summary>
         /// <param name="result">判定結果</param>
-        public void ShowJudgmentMessage(JudgmentResult result)
+        public void ShowJudgmentMessage(JudgmentResultStatus result)
         {
-            if(result == JudgmentResult.Equal)
+            if(result == JudgmentResultStatus.Equal)
             {
                 Console.WriteLine("正解です！");
                 Console.WriteLine($"もう1度プレイされるなら {ReplayKey} を入力してください。");
@@ -117,11 +117,11 @@ namespace KazuateGame
                     Exit(ExitKey);
                 }
             }
-            else if(result == JudgmentResult.Small)
+            else if(result == JudgmentResultStatus.Small)
             {
                 Console.WriteLine("入力値は小さいです。");
             }
-            else if(result == JudgmentResult.Big)
+            else if(result == JudgmentResultStatus.Big)
             {
                 Console.WriteLine("入力値は大きいです。");
             }
