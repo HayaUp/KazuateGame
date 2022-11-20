@@ -14,9 +14,6 @@ namespace KazuateGame
 
             var game = new Game();
 
-            // ゲームの説明文
-            game.ShowExplanationMessage();
-
             // ゲームのループ
             while(true)
             {

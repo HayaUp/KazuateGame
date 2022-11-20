@@ -34,6 +34,8 @@ namespace KazuateGame
             ReplayKey = "1";
 
             Reset();
+
+            ShowExplanationMessage();
         }
 
         /// <summary>
