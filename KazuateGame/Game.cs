@@ -50,7 +50,7 @@ namespace KazuateGame
         /// <summary>
         /// ゲームの説明文を表示する
         /// </summary>
-        public void ShowExplanatoryText()
+        public void ShowExplanationMessage()
         {
             Console.Clear();
             Console.WriteLine($"{RandomMinValue}～{DisplayMaxValue}の数値を入力し当ててください。");
@@ -105,7 +105,7 @@ namespace KazuateGame
 
                 if(input_value == ReplayKey)
                 {
-                    ShowExplanatoryText();
+                    ShowExplanationMessage();
                     Reset();
                 }
                 else
