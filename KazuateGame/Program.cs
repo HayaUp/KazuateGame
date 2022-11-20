@@ -4,6 +4,12 @@ namespace KazuateGame
 {
     class Program
     {
+        const int RandomMinValue        = 1;
+        const int RandomMaxValue        = 100 + 1;      // + 1 をしないと99までしか得られない
+        const string DisplayMaxValue    = "100";        // RandomMaxValue が + 1 で表示するので表示用を別に用意
+        const string ExitKey            = "q";
+        const string ReplayKey          = "1";
+
         /// <summary>
         /// エントリーポイント
         /// </summary>
@@ -14,11 +20,11 @@ namespace KazuateGame
 
             // 乱数の取得
             var random = new Random(DateTime.Now.Second);
-            var unknown_value = random.Next(1, 101);
+            var unknown_value = random.Next(RandomMinValue, RandomMaxValue);
 
             // ゲームの説明文
-            Console.WriteLine("1～100の数値を入力し当ててください。");
-            Console.WriteLine("q を入力するとゲームを終了します。");
+            Console.WriteLine($"{RandomMinValue}～{DisplayMaxValue}の数値を入力し当ててください。");
+            Console.WriteLine($"{ExitKey} を入力するとゲームを終了します。");
 
             // ゲームのループ
             while(true)
@@ -26,7 +32,7 @@ namespace KazuateGame
                 // キー入力
                 var input_value = Console.ReadLine();
 
-                if(input_value == "q")
+                if(input_value == ExitKey)
                 {
                     Console.WriteLine("ゲームを終了します。");
                     break;
@@ -41,15 +47,15 @@ namespace KazuateGame
                     if(input_number == unknown_value)
                     {
                         Console.WriteLine("正解です！");
-                        Console.WriteLine("もう1度プレイされるなら 1 を入力してください。");
+                        Console.WriteLine($"もう1度プレイされるなら {ReplayKey} を入力してください。");
 
                         // リプレイ
-                        if(Console.ReadLine() == "1")
+                        if(Console.ReadLine() == ReplayKey)
                         {
                             Console.Clear();
-                            Console.WriteLine("1～100の数値を入力し当ててください。");
-                            Console.WriteLine("q を入力するとゲームを終了します。");
-                            unknown_value = random.Next(1, 101);
+                            Console.WriteLine($"{RandomMinValue}～{DisplayMaxValue}の数値を入力し当ててください。");
+                            Console.WriteLine($"{ExitKey} を入力するとゲームを終了します。");
+                            unknown_value = random.Next(RandomMinValue, RandomMaxValue);
                         }
                         else
                         {
