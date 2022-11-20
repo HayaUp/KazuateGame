@@ -25,8 +25,8 @@ namespace KazuateGame
 
                 game.Exit(input_value);
 
-                var result = game.Judge(input_value);
-                game.ShowJudgmentMessage(result);
+                game.Judge(input_value);
+                game.ShowJudgmentMessage();
             }
         }
     }
