@@ -18,12 +18,14 @@ namespace KazuateGame
         {
             Console.Title = "数当てゲーム";
 
+            var game = new Game();
+
             // 乱数の取得
             var random = new Random(DateTime.Now.Second);
             var unknown_value = random.Next(RandomMinValue, RandomMaxValue);
 
             // ゲームの説明文
-            ShowExplanatoryText();
+            game.ShowExplanatoryText();
 
             // ゲームのループ
             while(true)
@@ -31,7 +33,7 @@ namespace KazuateGame
                 // キー入力
                 var input_value = Console.ReadLine();
 
-                Exit(input_value);
+                game.Exit(input_value);
 
                 var input_number = 0;
 
@@ -47,7 +49,7 @@ namespace KazuateGame
                         // リプレイ
                         if(Console.ReadLine() == ReplayKey)
                         {
-                            ShowExplanatoryText();
+                            game.ShowExplanatoryText();
                             unknown_value = random.Next(RandomMinValue, RandomMaxValue);
                         }
                         else
@@ -64,29 +66,6 @@ namespace KazuateGame
                         Console.WriteLine($"{input_number}は小さいです。");
                     }
                 }
-            }
-        }
-
-        /// <summary>
-        /// ゲームの説明文を表示する
-        /// </summary>
-        static void ShowExplanatoryText()
-        {
-            Console.Clear();
-            Console.WriteLine($"{RandomMinValue}～{DisplayMaxValue}の数値を入力し当ててください。");
-            Console.WriteLine($"{ExitKey} を入力するとゲームを終了します。");
-        }
-
-        /// <summary>
-        /// 特定のキーを押したらゲームを終了する
-        /// </summary>
-        /// <param name="input_key"></param>
-        /// <returns></returns>
-        static void Exit(string input_key)
-        {
-            if(input_key == ExitKey)
-            {
-                Environment.Exit(0);
             }
         }
     }
