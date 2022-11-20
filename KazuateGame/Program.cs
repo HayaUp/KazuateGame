@@ -31,10 +31,7 @@ namespace KazuateGame
                 // キー入力
                 var input_value = Console.ReadLine();
 
-                if(ExitGame(input_value))
-                {
-                    break;
-                }
+                Exit(input_value);
 
                 var input_number = 0;
 
@@ -85,9 +82,12 @@ namespace KazuateGame
         /// </summary>
         /// <param name="input_key"></param>
         /// <returns></returns>
-        static bool ExitGame(string input_key)
+        static void Exit(string input_key)
         {
-            return input_key == ExitKey;
+            if(input_key == ExitKey)
+            {
+                Environment.Exit(0);
+            }
         }
     }
 }
