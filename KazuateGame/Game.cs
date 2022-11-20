@@ -58,19 +58,6 @@ namespace KazuateGame
         }
 
         /// <summary>
-        /// 特定のキーを押したらゲームを終了する
-        /// </summary>
-        /// <param name="input_key"></param>
-        /// <returns></returns>
-        public void Exit(string input_key)
-        {
-            if(input_key == ExitKey)
-            {
-                Environment.Exit(0);
-            }
-        }
-
-        /// <summary>
         /// 入力値と特定の範囲の値を比較し判定する
         /// </summary>
         /// <param name="input_value">入力値</param>
@@ -92,6 +79,10 @@ namespace KazuateGame
                 {
                     judgmentResult = JudgmentResultStatus.Big;
                 }
+            }
+            else if(input_value == ExitKey)
+            {
+                Environment.Exit(0);
             }
             else
             {
@@ -119,7 +110,7 @@ namespace KazuateGame
                 }
                 else
                 {
-                    Exit(ExitKey);
+                    Environment.Exit(0);
                 }
             }
             else if(judgmentResult == JudgmentResultStatus.Small)

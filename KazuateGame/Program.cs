@@ -23,8 +23,6 @@ namespace KazuateGame
                 // キー入力
                 var input_value = Console.ReadLine();
 
-                game.Exit(input_value);
-
                 game.Judge(input_value);
                 game.ShowJudgmentMessage();
             }
