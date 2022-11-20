@@ -13,6 +13,8 @@ namespace KazuateGame
         public readonly string ExitKey;
         public readonly string ReplayKey;
 
+        public int UnknownValue { get; private set; }
+
         public Game()
         {
             RandomMinValue = 1;
@@ -20,6 +22,8 @@ namespace KazuateGame
             DisplayMaxValue = RandomMaxValue - 1;      // RandomMaxValue が + 1 で表示するので表示用を別に用意
             ExitKey = "q";
             ReplayKey = "1";
+
+            ResetUnknownValue();
         }
 
         /// <summary>
@@ -43,6 +47,15 @@ namespace KazuateGame
             {
                 Environment.Exit(0);
             }
+        }
+
+        /// <summary>
+        /// 特定の範囲の値を設定する
+        /// </summary>
+        private void ResetUnknownValue()
+        {
+            var random = new Random(DateTime.Now.Second);
+            UnknownValue = random.Next(RandomMinValue, RandomMaxValue);
         }
     }
 }
