@@ -23,8 +23,7 @@ namespace KazuateGame
             var unknown_value = random.Next(RandomMinValue, RandomMaxValue);
 
             // ゲームの説明文
-            Console.WriteLine($"{RandomMinValue}～{DisplayMaxValue}の数値を入力し当ててください。");
-            Console.WriteLine($"{ExitKey} を入力するとゲームを終了します。");
+            ShowExplanatoryText();
 
             // ゲームのループ
             while(true)
@@ -52,9 +51,7 @@ namespace KazuateGame
                         // リプレイ
                         if(Console.ReadLine() == ReplayKey)
                         {
-                            Console.Clear();
-                            Console.WriteLine($"{RandomMinValue}～{DisplayMaxValue}の数値を入力し当ててください。");
-                            Console.WriteLine($"{ExitKey} を入力するとゲームを終了します。");
+                            ShowExplanatoryText();
                             unknown_value = random.Next(RandomMinValue, RandomMaxValue);
                         }
                         else
@@ -72,6 +69,16 @@ namespace KazuateGame
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// ゲームの説明文を表示する
+        /// </summary>
+        static void ShowExplanatoryText()
+        {
+            Console.Clear();
+            Console.WriteLine($"{RandomMinValue}～{DisplayMaxValue}の数値を入力し当ててください。");
+            Console.WriteLine($"{ExitKey} を入力するとゲームを終了します。");
         }
     }
 }
