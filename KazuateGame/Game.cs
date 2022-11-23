@@ -5,23 +5,18 @@ namespace KazuateGame
     public class Game
     {
         // 定数
-        public readonly int RandomMinValue;
-        public readonly int RandomMaxValue;
-        public readonly int DisplayMaxValue;
         public readonly string ExitKey;
         public readonly string ReplayKey;
 
-        private int UnknownValue;
+        private Problem Problem;
         private Referee Referee;
 
         public Game()
         {
-            RandomMinValue = 1;
-            RandomMaxValue = 100 + 1;                  // + 1 をしないと99までしか得られない
-            DisplayMaxValue = RandomMaxValue - 1;      // RandomMaxValue が + 1 で表示するので表示用を別に用意
             ExitKey = "q";
             ReplayKey = "1";
 
+            Problem = new Problem();
             Referee = new Referee();
 
             Initialize();
@@ -32,8 +27,7 @@ namespace KazuateGame
         /// </summary>
         private void Initialize()
         {
-            var random = new Random(DateTime.Now.Second);
-            UnknownValue = random.Next(RandomMinValue, RandomMaxValue);
+            Problem.Initialize();
 
             ShowExplanationMessage();
         }
@@ -44,7 +38,7 @@ namespace KazuateGame
         private void ShowExplanationMessage()
         {
             Console.Clear();
-            Console.WriteLine($"{RandomMinValue}～{DisplayMaxValue}の数値を入力し当ててください。");
+            Console.WriteLine($"{Problem.ValueRange}の数値を入力し当ててください。");
             Console.WriteLine($"{ExitKey} を入力するとゲームを終了します。");
         }
 
@@ -59,7 +53,7 @@ namespace KazuateGame
 
                 if(int.TryParse(input_value, out int input_number))
                 {
-                    var result = Referee.Judge(input_number, UnknownValue);
+                    var result = Referee.Judge(input_number, Problem.UnknownValue);
                     Referee.ShowMessage(result);
 
                     if(result == Referee.JudgmentResult.Equal)
