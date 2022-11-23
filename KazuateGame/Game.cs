@@ -11,17 +11,8 @@ namespace KazuateGame
         public readonly string ExitKey;
         public readonly string ReplayKey;
 
-        // 入力値と特定の範囲の値の判定結果
-        public enum JudgmentResultStatus
-        {
-            Unknown,
-            Equal,
-            Small,
-            Big
-        }
-
         private int UnknownValue;
-        private JudgmentResultStatus judgmentResult;
+        private Referee Referee;
 
         public Game()
         {
@@ -31,20 +22,20 @@ namespace KazuateGame
             ExitKey = "q";
             ReplayKey = "1";
 
-            Reset();
+            Referee = new Referee();
 
-            ShowExplanationMessage();
+            Initialize();
         }
 
         /// <summary>
-        /// 特定の範囲の値や判定結果を初期化する
+        /// 初期化
         /// </summary>
-        private void Reset()
+        private void Initialize()
         {
             var random = new Random(DateTime.Now.Second);
             UnknownValue = random.Next(RandomMinValue, RandomMaxValue);
 
-            judgmentResult = JudgmentResultStatus.Unknown;
+            ShowExplanationMessage();
         }
 
         /// <summary>
@@ -58,68 +49,44 @@ namespace KazuateGame
         }
 
         /// <summary>
-        /// 入力値と特定の範囲の値を比較し判定する
+        /// メインループ
         /// </summary>
-        /// <param name="input_value">入力値</param>
-        /// <returns>判定内容</returns>
-        public void Judge(string input_value)
+        public void Run()
         {
-            // 入力は数値が前提だけど英字等が入力される可能性もある
-            if(int.TryParse(input_value, out int input_number))
+            while(true)
             {
-                if(input_number == UnknownValue)
-                {
-                    judgmentResult = JudgmentResultStatus.Equal;
-                }
-                else if(input_number < UnknownValue)
-                {
-                    judgmentResult = JudgmentResultStatus.Small;
-                }
-                else if(input_number > UnknownValue)
-                {
-                    judgmentResult = JudgmentResultStatus.Big;
-                }
-            }
-            else if(input_value == ExitKey)
-            {
-                Environment.Exit(0);
-            }
-            else
-            {
-                judgmentResult = JudgmentResultStatus.Unknown;
-            }
-        }
-
-        /// <summary>
-        /// 判定内容によって判定結果を表示する
-        /// </summary>
-        /// <param name="result">判定結果</param>
-        public void ShowJudgmentMessage()
-        {
-            if(judgmentResult == JudgmentResultStatus.Equal)
-            {
-                Console.WriteLine("正解です！");
-                Console.WriteLine($"もう1度プレイされるなら {ReplayKey} を入力してください。");
-
                 var input_value = Console.ReadLine();
 
-                if(input_value == ReplayKey)
+                if(int.TryParse(input_value, out int input_number))
                 {
-                    Reset();
-                    ShowExplanationMessage();
+                    var result = Referee.Judge(input_number, UnknownValue);
+                    Referee.ShowMessage(result);
+
+                    if(result == Referee.JudgmentResult.Equal)
+                    {
+                        Replay();
+                    }
                 }
-                else
+                else if(input_value == ExitKey)
                 {
                     Environment.Exit(0);
                 }
             }
-            else if(judgmentResult == JudgmentResultStatus.Small)
+        }
+
+        public void Replay()
+        {
+            Console.WriteLine($"もう1度プレイされるなら {ReplayKey} を入力してください。");
+
+            var input_value = Console.ReadLine();
+
+            if(input_value == ReplayKey)
             {
-                Console.WriteLine("入力値は小さいです。");
+                Initialize();
             }
-            else if(judgmentResult == JudgmentResultStatus.Big)
+            else
             {
-                Console.WriteLine("入力値は大きいです。");
+                Environment.Exit(0);
             }
         }
     }
