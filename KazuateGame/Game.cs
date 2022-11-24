@@ -56,6 +56,7 @@ namespace KazuateGame
             {
                 Player.Input();
 
+                // 入力内容が数値なら問題の値との判定、文字列ならゲームを終了するか判定
                 if(Player.IsNumber)
                 {
                     var result = Referee.Judge(Player.InputNumber, Problem.UnknownNumber);
