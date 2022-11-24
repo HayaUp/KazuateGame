@@ -9,6 +9,7 @@ namespace KazuateGame
         public readonly string ReplayKey;
 
         private Problem Problem;
+        private Player Player;
         private Referee Referee;
 
         public Game()
@@ -17,6 +18,7 @@ namespace KazuateGame
             ReplayKey = "1";
 
             Problem = new Problem();
+            Player = new Player();
             Referee = new Referee();
 
             Initialize();
@@ -28,6 +30,7 @@ namespace KazuateGame
         private void Initialize()
         {
             Problem.Initialize();
+            Player.Initialize();
 
             ShowExplanationMessage();
         }
@@ -49,11 +52,11 @@ namespace KazuateGame
         {
             while(true)
             {
-                var input_value = Console.ReadLine();
+                Player.Input();
 
-                if(int.TryParse(input_value, out int input_number))
+                if(Player.IsNumber)
                 {
-                    var result = Referee.Judge(input_number, Problem.UnknownValue);
+                    var result = Referee.Judge(Player.InputNumber, Problem.UnknownValue);
                     Referee.ShowMessage(result);
 
                     if(result == Referee.JudgmentResult.Equal)
@@ -61,20 +64,23 @@ namespace KazuateGame
                         Replay();
                     }
                 }
-                else if(input_value == ExitKey)
+                else if(Player.InputValue == ExitKey)
                 {
                     Environment.Exit(0);
                 }
             }
         }
 
+        /// <summary>
+        /// 正解後に再度ゲームをプレイするか問う
+        /// </summary>
         public void Replay()
         {
             Console.WriteLine($"もう1度プレイされるなら {ReplayKey} を入力してください。");
 
-            var input_value = Console.ReadLine();
+            Player.Input();
 
-            if(input_value == ReplayKey)
+            if(Player.InputValue == ReplayKey)
             {
                 Initialize();
             }

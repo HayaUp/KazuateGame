@@ -16,7 +16,6 @@ namespace KazuateGame
         public readonly int DisplayMaxValue;
         public readonly string ValueRange;
 
-
         public int UnknownValue { get; private set; }
 
         public Problem()
