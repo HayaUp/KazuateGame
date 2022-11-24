@@ -14,6 +14,8 @@ namespace KazuateGame
 
         public Game()
         {
+            Console.Title = "数当てゲーム";
+
             ExitKey = "q";
             ReplayKey = "1";
 
