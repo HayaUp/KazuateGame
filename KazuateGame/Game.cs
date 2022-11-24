@@ -41,7 +41,7 @@ namespace KazuateGame
         private void ShowExplanationMessage()
         {
             Console.Clear();
-            Console.WriteLine($"{Problem.ValueRange}の数値を入力し当ててください。");
+            Console.WriteLine($"{Problem.NumberRange}の数値を入力し当ててください。");
             Console.WriteLine($"{ExitKey} を入力するとゲームを終了します。");
         }
 
@@ -56,7 +56,7 @@ namespace KazuateGame
 
                 if(Player.IsNumber)
                 {
-                    var result = Referee.Judge(Player.InputNumber, Problem.UnknownValue);
+                    var result = Referee.Judge(Player.InputNumber, Problem.UnknownNumber);
                     Referee.ShowMessage(result);
 
                     if(result == Referee.JudgmentResult.Equal)

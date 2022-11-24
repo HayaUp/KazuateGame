@@ -11,19 +11,19 @@ namespace KazuateGame
         /// <summary>
         /// 定数
         /// </summary>
-        public readonly int RandomMinValue;
-        public readonly int RandomMaxValue;
-        public readonly int DisplayMaxValue;
-        public readonly string ValueRange;
+        public readonly int RandomMinNumber;
+        public readonly int RandomMaxNumber;
+        public readonly int DisplayMaxNumber;
+        public readonly string NumberRange;
 
-        public int UnknownValue { get; private set; }
+        public int UnknownNumber { get; private set; }
 
         public Problem()
         {
-            RandomMinValue = 1;
-            RandomMaxValue = 100 + 1;                               // + 1 をしないと99までしか得られない
-            DisplayMaxValue = RandomMaxValue - 1;                   // RandomMaxValue が + 1 で表示するので表示用を別に用意
-            ValueRange = $"{RandomMinValue}～{DisplayMaxValue}"; 
+            RandomMinNumber = 1;
+            RandomMaxNumber = 100 + 1;                                  // + 1 をしないと99までしか得られない
+            DisplayMaxNumber = RandomMaxNumber - 1;                     // RandomMaxNumber が + 1 で表示するので表示用を別に用意
+            NumberRange = $"{RandomMinNumber}～{DisplayMaxNumber}"; 
 
             Initialize();
         }
@@ -34,7 +34,7 @@ namespace KazuateGame
         public void Initialize()
         {
             var random = new Random(DateTime.Now.Second);
-            UnknownValue = random.Next(RandomMinValue, RandomMaxValue);
+            UnknownNumber = random.Next(RandomMinNumber, RandomMaxNumber);
         }
     }
 }
